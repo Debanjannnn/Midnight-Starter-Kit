@@ -12,6 +12,7 @@
 import * as readline from 'node:readline/promises';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { stdin as input, stdout as output } from 'node:process';
 import * as Rx from 'rxjs';
 import { WebSocket } from 'ws';
@@ -56,7 +57,7 @@ const NODE = process.env.NODE_URL ?? 'http://127.0.0.1:9944';
 const PROOF_SERVER = process.env.PROOF_SERVER_URL ?? 'http://127.0.0.1:6300';
 const NETWORK_ID = process.env.NETWORK_ID ?? 'undeployed';
 
-const currentDir = path.resolve(new URL(import.meta.url).pathname, '..');
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
 // ZK assets (keys, zkir) live in src/managed, not dist — tsc doesn't copy them
 const zkConfigPath = path.resolve(currentDir, '..', 'src', 'managed', 'counter');
 const deploymentPath = path.resolve(currentDir, '..', 'deployment.json');
